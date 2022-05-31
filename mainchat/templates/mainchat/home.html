@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'mainchat/img/icon.png' %}">
+    <link rel="stylesheet" href="{% static 'mainchat/css/chat.css' %}">
+    <title>Просто чат</title>
+</head>
+<body>
+    <main>
+        <center>
+            <h1>Чат</h1><br>
+            <div class="chat">
+                {% for message in messages %}
+                    <div class="in-chat" id="{{ message.id }}">
+                        <div class="time">{{ message.time_create|date:"SHORT_DATE_FORMAT" }} {{ message.time_create|time:"H:i" }}</div>
+                        <div class="name">{{ message.name }}</div>
+                        <div class="message">{{ message.message }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br><br>
+            <div class="send">
+                <form>
+                    <label for="name">Имя</label><br>
+                    <input type="text" id="name" placeholder="Имя" required><br>
+                    <label for="message">Сообщение</label><br>
+                    <textarea id="message" placeholder="Сообщение" cols="30" rows="10" required></textarea><br>
+                    <input type="button" onclick="SendMessage()" value="Отправить">
+                </form>
+            </div>
+        </center>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+
+        function SendMessage() {
+            let name = document.querySelector('form #name').value
+            let message = document.querySelector('form #message').value
+            console.log(name)
+            console.log(message)
+            $(document).ready(function () {
+                $.ajax({
+                    data: {
+                        "name": name,
+                        "message": message
+                    },
+                    url: "{% url 'add' %}",
+                    success: function (response) {
+                        if (response.hasOwnProperty("alert")) {
+                            alert(response["alert"])
+                        } else {
+                            document.querySelector('.chat').innerHTML += response
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response.responseJSON.errors)
+                    }
+                });
+                return false;
+            })
+        }
+
+        setInterval(CheckMessage, 10000)
+
+        function CheckMessage() {
+            let sms = document.querySelectorAll('.in-chat')
+            sms = sms[sms.length-1].id
+            $(document).ready(function () {
+                $.ajax({
+                    data: {
+                        "sms": sms
+                    },
+                    url: "{% url 'check' %}",
+                    success: function (response) {
+                        if (response.hasOwnProperty("ok")) {
+                        } else {
+                            document.querySelector('.chat').innerHTML += response
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response.responseJSON.errors)
+                    }
+                });
+                return false;
+            })
+        }
+    </script>
+
+</body>
+</html>

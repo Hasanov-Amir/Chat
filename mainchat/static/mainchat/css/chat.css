@@ -1,0 +1,32 @@
+.time, .name, .message {
+    display: inline-block;
+}
+
+.time, .name {
+    font-size: small;
+    font-style: italic;
+}
+
+.name {
+    color: red
+}
+
+.chat {
+    max-height: 300px;
+    width: 600px;
+    overflow-y: scroll
+}
+
+#name {
+    width: 230px;
+}
+
+#message {
+    width: 230px;
+    height: 100px;
+    resize: none;
+}
+
+.chat .in-chat {
+    text-align: left;
+}
