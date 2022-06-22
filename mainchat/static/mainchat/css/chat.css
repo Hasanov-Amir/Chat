@@ -1,32 +1,134 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #18191D;
+}
+
+h1 {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: white;
+    font-size: 60px;
+}
+
 .time, .name, .message {
     display: inline-block;
+    font-size: 25px;
+    color: #bbbbbb;
+    word-wrap: break-word;
 }
 
 .time, .name {
-    font-size: small;
-    font-style: italic;
+    font-size: 22px;font-style: italic;
+}
+
+.message {
+    color: white;
+    margin-left: 5px;
 }
 
 .name {
-    color: red
+    font-weight: bold;
+    color: #6AE56A;
 }
 
 .chat {
-    max-height: 300px;
-    width: 600px;
-    overflow-y: scroll
+    max-height: 700px;
+    width: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 5px;
+    background-color: #282E33;
 }
 
 #name {
-    width: 230px;
+    width: 30%;
+    height: 60px;
+    margin-right: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #282E33;
 }
 
 #message {
-    width: 230px;
-    height: 100px;
+    width: 70%;
+    height: 60px;
     resize: none;
+    border-radius: 5px;
+    border: none;
+    margin-right: 20px;
+    background-color: #282E33;
+}
+
+#message:focus, #name:focus {
+    outline: none;
+}
+
+#butt {
+    width: 60px;
+    height: 60px;
+    background-color: #282E33;
+    color: #6ae56a;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+}
+
+#butt:hover {
+    cursor: pointer;
+}
+
+#butt:active {
+    transform: scale(.9);
+}
+
+input[type="text"] {
+    padding: 0 0 0 10px;
+    color: #fff;
+    font-size: 20px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #b4b1b1;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #b4b1b1;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #b4b1b1;
 }
 
 .chat .in-chat {
     text-align: left;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chat::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chat {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

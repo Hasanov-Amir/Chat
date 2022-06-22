@@ -4,6 +4,6 @@
     <div class="in-chat" id="{{ message.id }}">
         <div class="time">{{ message.time_create|date:"SHORT_DATE_FORMAT" }} {{ message.time_create|time:"H:i" }}</div>
         <div class="name">{{ message.name }}</div>
-        <div class="message">{{ message.message }}</div>
+        <div class="message"> - {{ message.message }}</div>
     </div>
 {% endfor %}

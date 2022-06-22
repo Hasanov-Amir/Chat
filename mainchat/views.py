@@ -22,7 +22,9 @@ def receive(request):
         response = {
             'alert': 'Заполни все поля'
         }
+
         return JsonResponse(response)
+
     else:
         new = Chat(name=name, message=message)
         new.save()
